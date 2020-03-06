@@ -121,7 +121,15 @@ func (v *ResourceView) titleTextName() rty.Component {
 
 	color := statusColor(v.res)
 	sb.Text(p)
-	sb.Fg(color).Textf(" ● ")
+
+	switch color {
+	case cGood:
+		sb.Fg(color).Textf(" ● ")
+	case cBad:
+		sb.Fg(color).Textf(" ◉ ")
+	default:
+		sb.Fg(color).Textf(" ○ ")
+	}
 
 	name := v.res.Name.String()
 	if color == cPending {
